@@ -10,35 +10,42 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 class BSTNode:
-    def __init__(self, value=None, left=None, right=None):
+    def __init__(self, value):
         self.value = value
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
 
     # Insert the given value into the tree
     def insert(self, value):
 
-        #check to see if node is empty then insert if it is
-        new_node = BSTNode(value)
+        if value < self.value:
+            if self.left is None:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
 
-        new_node.value = self.value
-        new_node.left = None
-
-        if self.value is not None:
-            self.value.left = new_node
-
-        self.value = new_node
+        elif value >= self.value:
+            if self.right is None:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
             
       
-
-
-
-
-
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        if self.value == target:
+            return True
+        if target < self.value:
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(target)
+        else:
+            if self.right is None:
+                return False
+            else:
+                return self.right.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
