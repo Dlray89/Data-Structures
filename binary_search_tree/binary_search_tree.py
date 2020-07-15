@@ -10,14 +10,30 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 class BSTNode:
-    def __init__(self, value):
+    def __init__(self, value=None, left=None, right=None):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+
+        #check to see if node is empty then insert if it is
+        new_node = BSTNode(value)
+
+        new_node.value = self.value
+        new_node.left = None
+
+        if self.value is not None:
+            self.value.left = new_node
+
+        self.value = new_node
+            
+      
+
+
+
+
 
     # Return True if the tree contains the value
     # False if it does not
@@ -37,7 +53,12 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node is not None:
+
+            self.in_order_print(node.left)
+            print(str(node.value) + '->', end=' ')
+
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
