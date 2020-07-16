@@ -1,3 +1,4 @@
+from collections import deque
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -14,6 +15,7 @@ class BSTNode:
         self.value = value
         self.left = None
         self.right = None
+        self.level = None
 
     # Insert the given value into the tree
     def insert(self, value):
@@ -65,31 +67,61 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    def in_order_print(self, node):
-        if node is not None:
+    """
+        1. search the left subtree, call the function and assign to left side
+        2. visit the main node
+        3. search the right subtree, call the function and assign to right side
 
+    """
+    def in_order_print(self, node):
+        
+        if node:
             self.in_order_print(node.left)
-            print(str(node.value) + '->', end=' ')
+            print(node.value)
 
             self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
         pass
+
+    
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        if node is None:
+            return
+
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
+    """
+    1. visit the root node
+    2. search the left side call function and attach left side
+    3. search the right side call function and attach right side
+    """
     def pre_order_dft(self, node):
+        if node:
+            print(node.value)
+            self.pre_order_dft(node.left)
+            self.pre_order_dft(node.right)
         pass
 
     # Print Post-order recursive DFT
+    """
+    1. search through the left side and call the function. attach left side
+    2. search through the right side and call the function. attach right side
+    3. visit node
+    """
     def post_order_dft(self, node):
-        pass
+        
+        if node:
+            self.post_order_dft(node.left)
+            self.post_order_dft(node.right)
+            print(node.value)
